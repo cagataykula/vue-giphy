@@ -19,13 +19,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .gifCardWrapper {
-  transition: all .3s ease;
   margin: 10px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 .gifCardWrapper:hover {
-  transform: scale(1.1, 1.1);
 }
 .gif {
   width: 200px;
+  transition: all .3s ease;
+  height: 200px;
+}
+.gif:hover{
+    transform: scale(1.1, 1.1);
+
 }
 </style>
