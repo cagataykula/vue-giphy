@@ -28,8 +28,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.gifCardWrapper:hover {
-}
 .gif {
   width: 200px;
   transition: all .3s ease;
@@ -37,6 +35,6 @@ export default {
 }
 .gif:hover{
     transform: scale(1.1, 1.1);
-
 }
+
 </style>

@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <div class="gifs">
-      <GifCard
-        v-for="item in gifs"
-        :key="item.id + lastKey"
-        :src="item.images.fixed_height.url"
-      />
-    </div>
-    <infinite-loading @infinite="getNewGifs"></infinite-loading>
+<div>
+  <div class="gifs">
+    <GifCard
+      v-for="item in gifs"
+      :key="item.id + lastKey"
+      :src="item.images.fixed_height.url"
+    />
   </div>
+  <infinite-loading @infinite="getNewGifs"></infinite-loading>
+</div>
 </template>
 
 <script>
@@ -23,12 +23,11 @@ export default {
     return{
       gifs: [],
       gifCount: 0,
-      lastKey: ''
+      lastKey: '',
     }
   },
   methods: {
     getNewGifs: function ($state) {
-      console.log('state ', $state);
       axios.get(`https://api.giphy.com/v1/gifs/trending?api_key=nbAmrxeq4s6nOvEA4CUtgiFHNGa7JCMn&limit=20&offset=${this.gifCount}`)
         .then(response => {
           if (response.data.data.length) {
@@ -44,7 +43,7 @@ export default {
             $state.complete();
           }
         });
-    },
+    }
   },
   components: {
     GifCard,
