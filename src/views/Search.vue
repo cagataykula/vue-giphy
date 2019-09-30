@@ -2,11 +2,12 @@
   <div class="pageWrapper">
     <div class="top">
       <input type="text" v-model="query" v-on:keyup.enter="search()" />
-      <button @click="search()">Searh</button>
+      <button @click="search()">Search</button>
     </div>
     <div class="gifs">
       <GifCard v-for="item in gifs" :key="item.id + lastKey" :src="item.images.fixed_height.url" />
     </div>
+    <p v-if="noResult">No results found for {{query}}</p>
     <button v-if="gifs.length" @click="loadMore()">Load More</button>
   </div>
 </template>
@@ -21,7 +22,8 @@ export default {
       gifs: [],
       gifCount: 0,
       lastKey: '',
-      query: ''
+      query: '',
+      noResult: false
     };
   },
   methods: {
@@ -32,6 +34,7 @@ export default {
         )
         .then(response => {
           if (response.data.data.length) {
+            this.noResult = false;
             this.gifCount = 20;
             if (
               this.lastKey !=
@@ -43,6 +46,8 @@ export default {
               this.lastKey =
                 response.data.data[response.data.data.length - 1].id;
             }
+          } else {
+            this.noResult = true;
           }
         });
     },
@@ -69,6 +74,11 @@ export default {
   },
   components: {
       GifCard
+  },
+  watch: {
+    query: function (newValue) {
+      this.noResult = false;
+    }
   }
 };
 </script>
